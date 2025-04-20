@@ -4,7 +4,7 @@ import "./App.css";
 
 const initialMCQs = [
   {
-    question: "What does `===` do in JavaScript?",
+    question: "What does === do in JavaScript?",
     options: [
       "Assigns value",
       "Checks value only",
@@ -16,6 +16,51 @@ const initialMCQs = [
   {
     question: "Which keyword is used to declare a constant?",
     options: ["let", "var", "const", "static"],
+    correctAnswer: 2,
+  },
+  {
+    question: "Which method converts a JSON string into a JavaScript object?",
+    options: ["JSON.parse()", "JSON.stringify()", "parseJSON()", "convertJSON()"],
+    correctAnswer: 0,
+  },
+  {
+    question: "What is the output of '2' + 2 in JavaScript?",
+    options: ["4", "'22'", "NaN", "undefined"],
+    correctAnswer: 1,
+  },
+  {
+    question: "What will `typeof null` return in JavaScript?",
+    options: ["'null'", "'object'", "'undefined'", "'boolean'"],
+    correctAnswer: 1,
+  },
+  {
+    question: "Which of these is not a primitive data type in JavaScript?",
+    options: ["String", "Number", "Object", "Boolean"],
+    correctAnswer: 2,
+  },
+  {
+    question: "What does `Array.isArray([])` return?",
+    options: ["true", "false", "undefined", "null"],
+    correctAnswer: 0,
+  },
+  {
+    question: "Which of the following is used to stop an interval timer in JavaScript?",
+    options: ["clearInterval", "stopInterval", "cancelInterval", "endInterval"],
+    correctAnswer: 0,
+  },
+  {
+    question: "What is the purpose of the `trim()` method in JavaScript?",
+    options: [
+      "To remove whitespace from both ends of a string",
+      "To truncate a string",
+      "To remove all spaces in a string",
+      "To split a string",
+    ],
+    correctAnswer: 0,
+  },
+  {
+    question: "Which symbol is used for comments in JavaScript?",
+    options: ["<!-- -->", "#", "//", "/* */"],
     correctAnswer: 2,
   },
 ];
@@ -73,18 +118,31 @@ export default function App() {
 
   const generatePDFContent = (doc) => {
     let y = 10;
+    const pageHeight = doc.internal.pageSize.getHeight();
+  
     mcqs.forEach((q, i) => {
+      if (y > pageHeight - 30) {
+        doc.addPage();
+        y = 10;
+      }
       doc.text(`${i + 1}) ${q.question}`, 10, y);
       y += 8;
+  
       q.options.forEach((opt, j) => {
+        if (y > pageHeight - 20) {
+          doc.addPage();
+          y = 10;
+        }
         const label = String.fromCharCode(97 + j);
-        const mark = j === q.correctAnswer ? "" : "";
+        const mark = j === q.correctAnswer ? "(correct answer)" : "";
         doc.text(`   ${label}) ${opt} ${mark}`, 15, y);
         y += 7;
       });
+  
       y += 5;
     });
   };
+  
 
   const generatePDFPreview = () => {
     const doc = new jsPDF();
