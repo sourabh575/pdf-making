@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f4f4f9;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.left,
+.right {
+  padding: 20px;
+  overflow-y: auto;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.left {
+  width: 50%;
+  background: #fff;
+  border-right: 2px solid #ddd;
+}
+
+.right {
+  width: 50%;
+  background-color: #fdf6f6;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #fefefe;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.card input,
+.card select {
+  display: block;
+  width: 100%;
+  margin-bottom: 6px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.btns {
+  text-align: right;
+}
+
+button {
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button + button {
+  margin-left: 10px;
+}
+
+button.download {
+  background-color: green;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+iframe {
+  border: none;
+  height: calc(100vh - 60px);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+    height: auto;
+  }
+
+  iframe {
+    height: 400px;
+  }
+}
